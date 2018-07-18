@@ -7,20 +7,26 @@ import org.umssdiplo.automationv01.core.utils.CommonEvents;
 import org.umssdiplo.automationv01.core.utils.PropertyAccessor;
 
 public class Login extends BasePage {
-    @FindBy(name = "email")
-    private WebElement usernameInputField;
+    @FindBy(id = "user_email")
+    private WebElement emailTextBox;
 
-    @FindBy(name = "password")
-    private WebElement passwordInputField;
+    @FindBy(id = "user_password")
+    private WebElement passwordTextBox;
 
-    @FindBy(css = ".btn-primary.btn-block")
-    private WebElement loginBtn;
+    @FindBy(id = "btn-signin")
+    private WebElement loginButton;
 
-    public void setCredentials() {
+    @FindBy(xpath = "//p[contains(text(),'Signed in successfully.')]")
+    private WebElement successLoginMessage;
+
+    public void login(){
         String username = PropertyAccessor.getInstance().getUser();
         String password = PropertyAccessor.getInstance().getPassword();
-        CommonEvents.setInputField(usernameInputField, username);
-        CommonEvents.setInputField(passwordInputField, password);
-        CommonEvents.clickButton(loginBtn);
+        CommonEvents.setInputField(emailTextBox,username);
+        CommonEvents.setInputField(passwordTextBox,password);
+        CommonEvents.clickButton(loginButton);
+        CommonEvents.waitForEelmentIsNotVisible(successLoginMessage);
+
+
     }
 }

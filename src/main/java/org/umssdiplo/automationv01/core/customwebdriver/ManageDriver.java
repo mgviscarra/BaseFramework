@@ -37,6 +37,7 @@ public class ManageDriver {
     }
 
     public WebDriverWait getWebDriverWait() {
+        webDriverWait = new WebDriverWait(getInstance().getWebDriver(),IMPLICIT_TIME_WAIT);
         return webDriverWait;
     }
 

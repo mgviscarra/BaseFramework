@@ -4,9 +4,12 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.umssdiplo.automationv01.core.customwebdriver.ManageDriver;
 
+import javax.swing.*;
 import java.util.List;
 
 public class CommonEvents {
@@ -98,6 +101,11 @@ public class CommonEvents {
         return webElement.getText();
     }
 
+    public static void waitForEelmentIsNotVisible(WebElement element){
+        WebDriverWait wait = new WebDriverWait(ManageDriver.getInstance().getWebDriver(), 10);
+        wait.until(ExpectedConditions.invisibilityOf(element));
+    }
+
     /**
      * This method get title of current page.
      *
@@ -105,6 +113,11 @@ public class CommonEvents {
      */
     public static String getPageTitle() {
         return ManageDriver.getInstance().getWebDriver().getTitle();
+    }
+
+    public static void pressKey(Keys key){
+        Actions action = new Actions(ManageDriver.getInstance().getWebDriver());
+        action.sendKeys(key).build().perform();
     }
 
     /**
